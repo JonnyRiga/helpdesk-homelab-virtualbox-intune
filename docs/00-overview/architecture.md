@@ -1,45 +1,29 @@
-```mermaid
-flowchart LR
-  Internet((Internet)) --> NATNET[NAT Network: NATNET-WAN 10.10.10.0/24]
-  NATNET --> pfWAN[pfSense WAN (DHCP)]
-  pfWAN --> pfLAN[pfSense LAN 192.168.56.1/24]
-  pfLAN --> LABLAN[Host-Only: LAB-LAN 192.168.56.0/24]
+# Architecture Overview
 
-  LABLAN --> DC[Windows Server DC 192.168.56.10\nAD DS + DNS]
-  LABLAN --> W10[Windows 10 Client (DHCP)\nDomain Joined]
-  LABLAN --> UBU[Ubuntu Server (Optional)\nAdmin practice]
-  
-  W10 --> Intune[Intune Admin Center\nMDM Enrollment + Compliance]
+## Goal
+Build a pfSense-based virtual lab to practice helpdesk workflows: identity and access support, DNS/DHCP troubleshooting, policy validation, remote support, and Intune device management.
 
+## Topology
+- VirtualBox NAT Network provides WAN access to pfSense.
+- VirtualBox Host-Only network is the internal lab LAN.
+- pfSense acts as the router/firewall between WAN and LAN.
+- Windows Server provides AD DS and DNS for the domain.
+- Windows 10 client is domain-joined and enrolled into Intune (MDM).
 
-## Proof checklist (docs/03-proof/proof-checklist.md)
-```md
-# Proof Checklist (Screenshots)
+## VirtualBox Networks
+- NAT Network: NATNET-WAN (example 10.10.10.0/24)
+- Host-Only: LAB-LAN (192.168.56.0/24)
 
-## Architecture
-- [ ] VirtualBox network list showing NATNET-WAN and LAB-LAN
-- [ ] pfSense VM network adapters (WAN on NATNET-WAN, LAN on LAB-LAN)
-
-## pfSense
-- [ ] LAN interface set to 192.168.56.1/24
-- [ ] DHCP Server enabled with scope 192.168.56.100-199
-- [ ] Firewall rules summary (LAN allow rule)
-
-## Windows Server (AD DS/DNS)
-- [ ] AD Users and Computers showing OU structure
-- [ ] DNS forward lookup zone for lab.local
-- [ ] User and group objects created
-
-## Windows 10 Client
-- [ ] System properties showing domain join (lab.local)
-- [ ] IP configuration showing DHCP from pfSense
-
-## Group Policy
-- [ ] Example GPO linked to Workstations OU (or Users OU)
-- [ ] Evidence of a policy applied on the client
-
-## Intune
-- [ ] Device appears in Intune (Windows devices list)
-- [ ] Device overview page (management state, last check-in)
-- [ ] Compliance policy assignment
-- [ ] Compliance status page (Compliant or Not compliant with reason)
+## Components
+- pfSense
+  - WAN: DHCP via NATNET-WAN
+  - LAN: 192.168.56.1/24
+  - DHCP Server on LAN: 192.168.56.100 to 192.168.56.199
+- Windows Server (Domain Controller)
+  - Static IP: 192.168.56.10
+  - Roles: AD DS, DNS
+  - Domain: lab.local
+- Windows 10 Client
+  - DHCP from pfSense
+  - Joined to lab.local
+  - Enrolled into Intune for MDM and compliance reporting
