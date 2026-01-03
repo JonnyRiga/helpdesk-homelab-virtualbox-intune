@@ -20,7 +20,7 @@ This repository documents a pfSense-based virtual homelab built in VirtualBox to
 - Overview: docs/00-overview/architecture.md
 - IP plan: docs/00-overview/ip-plan.md
 - VM inventory: docs/00-overview/vm-inventory.md
-- Diagram: docs/00-overview/network-diagram.mmd
+- Diagram: docs/00-overview/network-diagram.md
 
 ## Build guide
 1. VirtualBox networks: docs/01-build-guide/01-virtualbox-networks.md
