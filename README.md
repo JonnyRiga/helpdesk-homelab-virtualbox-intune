@@ -1,5 +1,8 @@
 # Helpdesk Homelab (pfSense, Windows Domain, Intune MDM)
 
+This project is a pfSense-based virtual enterprise homelab built in VirtualBox to practice real helpdesk workflows:
+Active Directory administration, DNS/DHCP troubleshooting, Group Policy validation, remote support, and Microsoft Intune (MDM) enrollment and compliance reporting.
+
 ## What I built
 - pfSense firewall/router providing a lab WAN/LAN boundary and DHCP on the internal LAN
 - Windows Server domain controller with AD DS and DNS (lab.local)
