@@ -30,6 +30,7 @@ This repository documents a pfSense-based virtual homelab built in VirtualBox to
 5. Intune MDM enrollment: docs/01-build-guide/05-intune-mdm-enrollment.md
 
 ## Runbooks (ticket-style)
+- Runbooks index: [docs/02-runbooks/README.md](docs/02-runbooks/README.md)
 - Template: docs/02-runbooks/ticket-template.md
 - Ticket 001: Domain login failure
 - Ticket 002: RDP connectivity failure
